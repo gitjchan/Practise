@@ -1,6 +1,43 @@
 <!DOCTYPE html>
 <script>
 
+    // Array.from() takes an iterable or array like object to convert into a actual array
+    // It takes 3 parameters:- (arrayLike object to convert into a a array, map(), thisArg)
+
+    // Example 1 - It can be used on string (as it is an iterable)
+    const item = 'sword';
+    console.log(Array.from(item));
+
+    // Example 2 - It can be used on array like objects, such as `arguments`
+    function passArg() {
+        return Array.from(arguments);
+    }
+    console.log(passArg(1, 2, 3));
+    console.log(passArg('a', 'b', 'c'));
+
+    // Example 3 - It can be used as a sequence generator.
+    // The object will produce `undefined` x number of times, depending on the length
+    // The second parameter is .map(), therefore the 'x' will be undefined as that is what this object passed will output, so we can instead use the index to generate a number
+
+    // Example 3.1 - Generating a number sequence
+    const generator = Array.from({ length: 3 }, (x, i) => i + 1);
+    console.log(generator);
+
+    // This can be used for more complex examples, such as generating months, alphabet etc.
+    // Example 3.2 - Sequence generator
+    // Function takes 3 arguments, start pos., stop pos., number of steps to skip (i.e. if range if 10, and you skip 2 then the array will be [2, 4, 6, 8, 10]) 
+    const range = function (start, stop, step) {
+        // 1st parameter: calculates the brackets, then divides, then addition. The +1 puts the length back up to correct math output 
+        // 2nd parameter: uses the Index to calculate the starting position, and how many steps was specified to output correct values
+        return Array.from({ length: (stop - start) / step + 1 }, (undefined, i) => start + (i * step));
+    };
+    console.log(range(0, 5, 1))
+
+    // Example 3.3 - Generating a alphabet
+    // TASK: Jason to look at the charCodeAt method to understand how it works
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+
+
 </script>
 
 </html>
