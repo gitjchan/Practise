@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Creating Promises!</title>
+</head>
+
+<body>
+  <script>
+    // The promise Constructor returns two functions, resolve and reject
+    // We input in this example what we returned as text
+
+    // For the 'reject' we deliberately put 'Error()' around the text, so in the console, we can see which line the error occurs
+    // This is working with the .catch when we get the response from the Promise
+    // This makes it easier for debugging
+    const myPromise = new Promise((resolve, reject) => {
+      if (resolve) {
+        setTimeout(() => {
+          resolve('Jason has resolved');
+        }, 1000)
+      } else {
+        setTimeout(() => {
+          reject(Error(`Jason hasn't resolved`));
+        }, 1000)
+      }
+    });
+
+    myPromise
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+
+  </script>
+</body>
+
+</html>

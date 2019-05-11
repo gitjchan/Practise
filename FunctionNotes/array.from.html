@@ -26,7 +26,7 @@
     // This can be used for more complex examples, such as generating months, alphabet etc.
     // Example 3.2 - Sequence generator
     // Function takes 3 arguments, start pos., stop pos., number of steps to skip (i.e. if range if 10, and you skip 2 then the array will be [2, 4, 6, 8, 10]) 
-    const range = function (start, stop, step) {
+    const range = function (start, stop, step = 1) {
         // 1st parameter: calculates the brackets, then divides, then addition. The +1 puts the length back up to correct math output 
         // 2nd parameter: uses the Index to calculate the starting position, and how many steps was specified to output correct values
         return Array.from({ length: (stop - start) / step + 1 }, (undefined, i) => start + (i * step));
@@ -34,9 +34,8 @@
     console.log(range(0, 5, 1))
 
     // Example 3.3 - Generating a alphabet
-    // TASK: Jason to look at the charCodeAt method to understand how it works
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
-
+    // Once the Array has been created we do a .map() to convert the character codes back into a string
+    console.log(range('B'.charCodeAt(0), 'Z'.charCodeAt(0)).map(x => String.fromCharCode(x)));
 
 </script>
 

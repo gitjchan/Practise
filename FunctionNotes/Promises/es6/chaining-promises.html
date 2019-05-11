@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Chaining Promises</title>
+</head>
+
+<body>
+  <script>
+    // This example simulates a database
+    // Hence why we put setTimeOut() 
+
+    const posts = [
+      { title: 'I love JavaScript', author: 'Wes Bos', id: 1 },
+      { title: 'CSS!', author: 'Chris Coyier', id: 2 },
+      { title: 'Dev tools tricks', author: 'Addy Osmani', id: 3 },
+    ];
+
+    const authors = [
+      { name: 'Wes Bos', twitter: '@wesbos', bio: 'Canadian Developer', id: 4132, description: "Works one" },
+      { name: 'Chris Coyier', twitter: '@chriscoyier', bio: 'CSS Tricks and CodePen', id: 4103, description: "Works two" },
+      { name: 'Addy Osmani', twitter: '@addyosmani', bio: 'Googler', id: 4094, description: "Works three" },
+    ];
+
+    function getPostById(id) {
+      // create a new promise
+      return new Promise((resolve, reject) => {
+        // using a setTimeOut to mimic a database
+        setTimeout(() => {
+          // find the post we want
+          const post = posts.find(post => post.id === id);
+          if (post) {
+            resolve(post); // send the post back
+          } else {
+            reject(Error('No Post Was Found!'));
+          }
+        }, 200);
+      });
+    }
+
+    // function hydrateAuthor(post) {
+    //   // create a new promise
+    //   return new Promise((resolve, reject) => {
+    //     // find the author
+    //     const authorDetails = authors.find(person => person.name === post.author);
+    //     if (authorDetails) {
+    //       // "hydrate" the post object with the author object
+    //       post.author = authorDetails;
+    //       resolve(post);
+    //     } else {
+    //       reject(Error('Can not find the author'));
+    //     }
+    //   });
+    // }
+
+    // getPostById(2)
+    //   // .then(post => {
+    //   //   return hydrateAuthor(post);
+    //   // })
+    //   .then(post => {
+    //     console.log(post);
+    //   })
+    //   .catch(err => {
+    //     console.error(err);
+    //   });
+
+
+
+    // Example using fetch from a URL
+    const somePosts = fetch('https://wesbos.com/wp-json/wp/v2/posts');
+
+    // This function retrives the `somePosts`
+    function firstPromise() {
+      return new Promise((resolve, reject) => {
+        if (resolve) {
+          resolve(somePosts);
+        } else {
+          reject(Error('Nothing found!'))
+        }
+      })
+    }
+
+    // This function will "hydrate", an existing Promise. Known as chaining promises
+    // In the function below we will find the Object (returned by somePosts) that has a matching ID in `authors`
+    // We find the 'title' in `somePosts`, and we replace with 'description' from `authors` variable
+    // This function gets called in `getJSONByID` below
+    function hydrateFunc(post) {
+      return new Promise((resolve, reject) => {
+        const matchingPost = authors.find(desc => desc.id === post.id);
+        if (matchingPost) {
+          post.title.rendered = matchingPost.description;
+          resolve(post);
+        } else {
+          reject(Error('Not working!'));
+        }
+      })
+    }
+
+    // This function is filtering for specific Object by ID
+    // The const in the 2nd .then() matches the id from the parameter
+    // Notice in this example that do Promise chaining in the 2nd .then()
+    // Any .then() after this point will be chained to the new Promise (hydrateFunc)
+    function getJSONByID(id) {
+      return firstPromise()
+        .then(response => response.json())
+        .then(posts => {
+          const post = posts.find(post => post.id === id);
+          return hydrateFunc(post);
+        })
+        .then(post => console.log(post))
+        .catch(err => {
+          console.log(err);
+        })
+    }
+    // ID possibilities to try: 4132, 4094, 4103
+    // In console navigate to 'title' to see changes
+    getJSONByID(4094);
+
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Promises!</title>
+</head>
+
+<body>
+  <script>
+    const postsPromise = fetch('https://wesbos.com/wp-json/wp/v2/posts');
+
+    // postsPromise
+    //   .then(response => response.json())
+    //   .then(data => { console.log(data) })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   })
+
+    // You can expand how you want to restore the response before logging the json data
+    // In this case we want to store it in another object first
+    // the .then() is chaining them, and the arguments get passed on to the next .then()
+    postsPromise
+      .then(response => response.json()
+        .then(data => ({
+          data,
+          status: response.status,
+        }))
+      )
+      .then(data => { console.log(data) })
+      .catch((err) => {
+        console.error(err);
+      })
+
+  </script>
+</body>
+
+</html>
