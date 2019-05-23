@@ -8,28 +8,57 @@
 
 <body>
   <script>
-    //Example 1
-    fetch('https://api.github.com/users/chriscoyier/repos')
-      .then(response => response.json())
-      .then(data => {
-        // Here's a list of repos!
-        console.log(data)
-      });
+    //Example 1 - With Basic Error Handling
+    // fetch('https://api.github.com/users/chriscoyier/repos')
+    //   // Instead of creating a Function with a new Promise, we can resolve the response in the .then()
+    //   .then(response => {
+    //     if (response.ok) {
+    //       return response.json()
+    //     } else {
+    //       return Promise.reject(Error('Something bad')) // This will get passed into the .catch()
+    //     }
+    //   })
+    //   .then(data => {
+    //     // Here's a list of repos!
+    //     console.log(data)
+    //   })
+    // The.catch() will help find the error
+    //   .catch(error => {
+    //     if (error.status === 404) {
 
-    // Example 2
-    const url = fetch('https://api.github.com/users/chriscoyier/repos')
-    function newPromise(response) {
-      return new Promise((resolve, reject) => {
-        if (resolve) {
-          resolve(response);
-        } else {
-          reject(Error('Problem occurred!'))
-        }
-      })
+    //     }
+    //   })
+
+    //Example 2 - With Basic Error Handling
+    fetch('https://api.github.com/users/chriscoyier/repos')
+      .then(handleResponse)
+
+    function handleResponse(response) {
+      return response.json()
+        .then(json => {
+          if (response.ok) {
+            return console.log(json);
+          } else {
+            return Promise.reject(json); // This will get passed into the .catch()
+          }
+        })
     }
-    newPromise(url)
-      .then(url => url.json())
-      .then(data => console.log(data));
+
+    // Alternative of Example 1 - with very basic error handling
+    // const url = fetch('https://api.github.com/users/chriscoyier/repos')
+    // function newPromise(response) {
+    //   return new Promise((resolve, reject) => {
+    //     if (resolve) {
+    //       resolve(response);
+    //     } else {
+    //       reject(Error('Problem occurred!'))
+    //     }
+    //   })
+    // }
+    // newPromise(url)
+    //   .then(url => url.json())
+    //   .then(data => console.log(data))
+    //   .catch(error => console.log(error));
 
   </script>
 </body>
