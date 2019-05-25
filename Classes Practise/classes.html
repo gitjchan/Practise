@@ -1,27 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Inheritance Review</title>
 </head>
+
 <body>
-<script>
-  function Dog(name, breed) {
-    this.name = name;
-    this.breed = breed;
-  }
+  <script>
+    // Classes
 
-  Dog.prototype.bark = function() {
-    console.log(`Bark Bark! My name is ${this.name}`);
-  };
+    // NOTES: Classes are NOT a new object-oriented inheritance model in JS, it is syntactical sugar over JS exisiting prototype-based inheritance; it consolidates everything into a Class
+    // Notice that the methods in the class below are not separated by commas, this is how the syntax is
+    // The below is a class declaration. Classes can be written as named or unnamed expressions too
+    // Unlike Function declarations, Class declarations CANNOT be hoisted. The same goes for Class expression too
+    class Dog {
+      constructor(name, breed) {
+        this.name = name;
+        this.breed = breed;
+      }
+      // The methods below are using the shorthand form of functions that is new to ES6
+      bark() {
+        console.log(`Bark Bark! My name is ${this.name}`);
+      }
+      cuddle() {
+        console.log(`I love you owner!`);
+      }
+      // Static method
+      // Static method can only be used on the class itself, not on any instances of the class
+      // I.e. If I invoke - snickers.info() it will not call the information below
+      // However, if I call Dog.info() the information will appear as expected as it is called directly
+      static info() {
+        console.log('Sausage dogs are the best kind of dog!');
+      }
+      // GETTERS/SETTERS
+      // NOTES: These are not new to ES6, however they have been made easier to use and understand
 
-  Dog.prototype.cuddle = function() {
-    console.log(`I love you owner!`);
-  };
+      // SETTERS 
+      // 'nicknames' below can be called and a parameter can be passed to it
+      // You can then call lucky.nick and it will set the value, in this case it will also trim() any whitespace off what you set
+      // i.e. lucky.nicknames = '  doggy    ';
+      set nickname(value) {
+        this.nick = value.trim();
+      }
 
-  const snickers = new Dog('Snickers', 'King Charles');
-  const sunny = new Dog('Sunny', 'Golden Doodle');
+      // GETTERS
+      // NOTE: Getters are NOT a method, but rather a property that is computed when he call on it
 
-</script>
+      // Getter to set the nickname from the setter above
+      // Without this getter the setter of nickname above, would not get returned
+      // We are also getting it returned in uppercase
+      get nickname() {
+        return this.nick.toUpperCase();
+      }
+
+      // Getter to set a description
+      get description() {
+        return `${this.name} is a ${this.breed}, the best type of dog`;
+      }
+
+
+    }
+
+    // Prototype Inheritence
+    // function Dog(name, breed) {
+    //   this.name = name;
+    //   this.breed = breed;
+    // }
+
+    // Dog.prototype.bark = function() {
+    //   console.log(`Bark Bark! My name is ${this.name}`);
+    // };
+
+    // Dog.prototype.cuddle = function() {
+    //   console.log(`I love you owner!`);
+    // };
+
+    const lucky = new Dog('Lucky', 'Dachshund');
+    const sunny = new Dog('Sunny', 'Golden Doodle');
+
+  </script>
 </body>
+
 </html>
