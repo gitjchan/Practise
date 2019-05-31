@@ -20,23 +20,47 @@ const capitalize = function(string){
 // function to return a string where every other word is in all caps. 
 // Hint: look up Array.prototype.map on MDN and see what arguments the .map callback can take. 
 // ex: swapCase('hey gurl, lets javascript together sometime') // => "HEY gurl, LETS javascript TOGETHER sometime"
-var swapCase = function(string = 'Default string') {
-  const stringArr = string.split(' ');
-  const newSentence = stringArr.map(function (word, index) {
-    // Can try using a reduce function in here as well instead of +=
-    let swapped = '';
-    if (index % 2) {
-      swapped += capitalize(word);
-    } else {
-      swapped += word;
-    }
-    return swapped;
-  });
 
-  return newSentence; 
+// METHOD 1 - Using .map()
+// var swapCase = function(string = 'Default string') {
+//   const stringArr = string.split(' ');
+//   const newSentence = stringArr.map(function (word, index) {
+//     // Can try using a reduce function in here as well instead of +=
+//     let swapped = '';
+//     if (index % 2) {
+//       swapped += capitalize(word);
+//     } else {
+//       swapped += word;
+//     }
+//     return swapped;
+//   });
+//   //join() used to turn this back into a string
+//   return newSentence.join(' ');
+// }
+// console.log(swapCase('wow this sentence is really tripping me out!'));
+
+//  METHOD 2 - Using reduce (I know I skipped ahead here)
+const capitalize = function(string){
+  const stringArr = Array.from(string);
+  const upperCaseString = stringArr.map(word => {
+    return word.toUpperCase();
+  })
+  return upperCaseString.join('');
 }
 
-console.log(swapCase('wow this sentence is really tripping me out!'));
+const swapCase = function(string = 'Default string') {
+  const stringArr = string.split(' ');
+  const newSentence = stringArr.reduce(function (sentence, nextWord, index) {
+    // Ensure every other word gets put through the capitlize function
+    index % 2 ? nextWord = capitalize(nextWord) : nextWord;
+    // if it is not the first value in the array start joining it with the previous value to form a sentence
+    return index === 0 ? nextWord : sentence + ' ' + nextWord;
+  });
+  return newSentence;
+}
+console.log(swapCase());
+
+
 
 // Write a function shiftLetters that takes a string and uses .map to return an encoded string with each letter shifted down the 
 // alphabet by one. Hint: Use Look up the JS functions String.fromCharCode() and String.CharCodeAt() and see if you can use
