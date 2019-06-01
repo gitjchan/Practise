@@ -53,9 +53,12 @@ const swapCase = function(string = 'Default string') {
   const newSentence = stringArr.reduce(function (sentence, nextWord, index) {
     // Ensure every other word gets put through the capitlize function
     index % 2 ? nextWord = capitalize(nextWord) : nextWord;
-    // if it is not the first value in the array start joining it with the previous value to form a sentence
-    return index === 0 ? nextWord : sentence + ' ' + nextWord;
-  });
+    return `${sentence} ${nextWord}`;
+    
+    // If we did not use a second parameter on reduce, below could be a way to get around it. Which would probably be very seldom.
+    // If it is not the first value in the array start joining it with the previous value to form a sentence
+    // return index === 0 ? nextWord : sentence + ' ' + nextWord;
+  }, '');
   return newSentence;
 }
 console.log(swapCase());
@@ -67,9 +70,21 @@ console.log(swapCase());
 // Ascii code to acomplish this.
 // ex. shiftLetters('hello') // => 'ifmmp'
 // ex. (shiftLetters('abcxyz') // => "bcdyz{"
-var shiftLetters = function(string){
-  // code!
+const shiftLetters = function(string = 'hello') {
+  // Transform into an array to use .map
+  const stringArray = string.split('');
+  // Use .map to shift the letters into a new array
+  const convertString = stringArray.map(function (letter) {
+    // 1) Find the character code first // 2) We then need to +1 to the code
+    const characterCode = letter.charCodeAt(letter) + 1;
+    // Using the new code, retrieve the character itself
+    return String.fromCharCode(characterCode);
+  })
+  // Return the stringArray output
+  return convertString.join('');
 }
+console.log(shiftLetters());
+
 
 // REDUCE
 
