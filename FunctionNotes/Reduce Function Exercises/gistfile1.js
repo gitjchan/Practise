@@ -40,28 +40,28 @@ const capitalize = function(string){
 // console.log(swapCase('wow this sentence is really tripping me out!'));
 
 //  METHOD 2 - Using reduce (I know I skipped ahead here)
-const capitalize = function(string){
-  const stringArr = Array.from(string);
-  const upperCaseString = stringArr.map(word => {
-    return word.toUpperCase();
-  })
-  return upperCaseString.join('');
-}
+// const capitalize = function(string){
+//   const stringArr = Array.from(string);
+//   const upperCaseString = stringArr.map(word => {
+//     return word.toUpperCase();
+//   })
+//   return upperCaseString.join('');
+// }
 
-const swapCase = function(string = 'Default string') {
-  const stringArr = string.split(' ');
-  const newSentence = stringArr.reduce(function (sentence, nextWord, index) {
-    // Ensure every other word gets put through the capitlize function
-    index % 2 ? nextWord = capitalize(nextWord) : nextWord;
-    return `${sentence} ${nextWord}`;
+// const swapCase = function(string = 'Default string') {
+//   const stringArr = string.split(' ');
+//   const newSentence = stringArr.reduce(function (sentence, nextWord, index) {
+//     // Ensure every other word gets put through the capitlize function
+//     index % 2 ? nextWord = capitalize(nextWord) : nextWord;
+//     return `${sentence} ${nextWord}`;
     
-    // If we did not use a second parameter on reduce, below could be a way to get around it. Which would probably be very seldom.
-    // If it is not the first value in the array start joining it with the previous value to form a sentence
-    // return index === 0 ? nextWord : sentence + ' ' + nextWord;
-  }, '');
-  return newSentence;
-}
-console.log(swapCase());
+//     // If we did not use a second parameter on reduce, below could be a way to get around it. Which would probably be very seldom.
+//     // If it is not the first value in the array start joining it with the previous value to form a sentence
+//     // return index === 0 ? nextWord : sentence + ' ' + nextWord;
+//   }, '');
+//   return newSentence;
+// }
+// console.log(swapCase());
 
 
 
@@ -70,20 +70,20 @@ console.log(swapCase());
 // Ascii code to acomplish this.
 // ex. shiftLetters('hello') // => 'ifmmp'
 // ex. (shiftLetters('abcxyz') // => "bcdyz{"
-const shiftLetters = function(string = 'hello') {
-  // Transform into an array to use .map
-  const stringArray = string.split('');
-  // Use .map to shift the letters into a new array
-  const convertString = stringArray.map(function (letter) {
-    // 1) Find the character code first // 2) We then need to +1 to the code
-    const characterCode = letter.charCodeAt(letter) + 1;
-    // Using the new code, retrieve the character itself
-    return String.fromCharCode(characterCode);
-  })
-  // Return the stringArray output
-  return convertString.join('');
-}
-console.log(shiftLetters());
+// const shiftLetters = function(string = 'hello') {
+//   // Transform into an array to use .map
+//   const stringArray = string.split('');
+//   // Use .map to shift the letters into a new array
+//   const convertString = stringArray.map(function (letter) {
+//     // 1) Find the character code first // 2) We then need to +1 to the code
+//     const characterCode = letter.charCodeAt(letter) + 1;
+//     // Using the new code, retrieve the character itself
+//     return String.fromCharCode(characterCode);
+//   })
+//   // Return the stringArray output
+//   return convertString.join('');
+// }
+// console.log(shiftLetters());
 
 
 // REDUCE
@@ -91,9 +91,28 @@ console.log(shiftLetters());
 // Write a function that takes a string and returns an object representing the character 
 // count for each letter. Use .reduce to build this object. 
 // ex. countLetters('abbcccddddeeeee') // => {a:1, b:2, c:3, d:4, e:5}
-var countLetters = function(string){
-  // your code here
+const countLetters = function(string = 'abbc') {
+  // Need a empty object variable to store values
+  let myObject = {};
+  // Convert string to array
+  const stringArray = Array.from(string);
+  // Begin .reduce function, parameters will be (currentLetters, nextLetter, index)
+  const letterCount = stringArray.reduce((currentLetters, nextLetter, index) => {
+    // Push the string into the object as a property, and the count as a value
+    myObject.currentLetters = 'testing';
+    return myObject;
+    // Need to have a check to see if the currentLetters === nextLetter ? X : Y
+    // Need to get the immediate currentLetters, so it isn't all of them, can do that be getting the nextLetter[i - 1], to get the index of the previous letter
+
+
+  })
+  return letterCount;
+  // If they do match we need a way to count how many times it occurred
+  // If currentLetter !== nextLetter ? resetCounter : keepCounting
 };
+console.log(countLetters());
+
+// Challenge yourself option BONUS - out of interesting try sorting the string first if the string is jumbled, and potentially with random characters
 
 // Write a function that takes a string and a target, and returns true or false if the target is present in the string. Use
 // .reduce to acomplish this.
