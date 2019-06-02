@@ -91,36 +91,51 @@ const capitalize = function(string){
 // Write a function that takes a string and returns an object representing the character 
 // count for each letter. Use .reduce to build this object. 
 // ex. countLetters('abbcccddddeeeee') // => {a:1, b:2, c:3, d:4, e:5}
-const countLetters = function(string = 'abbc') {
-  // Need a empty object variable to store values
-  let myObject = {};
+const countLetters = function(string = 'abvcsdawerrghbyuthfdvd') {
   // Convert string to array
   const stringArray = Array.from(string);
-  // Begin .reduce function, parameters will be (currentLetters, nextLetter, index)
-  const letterCount = stringArray.reduce((currentLetters, nextLetter, index) => {
+  // Begin .reduce function, parameters will be (currentLetters, nextLetter)
+  const letterCount = stringArray.reduce((currentLetters, nextLetter) => {
     // Push the string into the object as a property, and the count as a value
-    myObject.currentLetters = 'testing';
-    return myObject;
     // Need to have a check to see if the currentLetters === nextLetter ? X : Y
-    // Need to get the immediate currentLetters, so it isn't all of them, can do that be getting the nextLetter[i - 1], to get the index of the previous letter
+    // If it does not exist, make = 1
+    if (currentLetters[nextLetter]) {
+      currentLetters[nextLetter]++;
+    } else {
+      // If it does exist, increment
+      currentLetters[nextLetter] = 1;
+    }
+    // Concise but less readable version
+    // currentLetters[nextLetter] ? currentLetters[nextLetter]++ : currentLetters[nextLetter] = 1;
 
-
-  })
+    return currentLetters;
+  }, {})
   return letterCount;
-  // If they do match we need a way to count how many times it occurred
-  // If currentLetter !== nextLetter ? resetCounter : keepCounting
 };
 console.log(countLetters());
 
-// Challenge yourself option BONUS - out of interesting try sorting the string first if the string is jumbled, and potentially with random characters
-
 // Write a function that takes a string and a target, and returns true or false if the target is present in the string. Use
-// .reduce to acomplish this.
+// .reduce to accomplish this.
 // ex. isPresent('abcd', 'b') // => true
 // ex. isPresent('efghi', 'a') // => false
-var isPresent = function(string, target) {
-  // GO GO GADGET CODE!
+const isPresent = function(string = 'abc', target = 'a') {
+  // Convert string to array
+  const stringArray = Array.from(string);
+  // Begin .reduce function, parameters will be (currentLetters, nextLetter)
+  const letterCount = stringArray.reduce((currentLetters, nextLetter) => {
+    // If needs to check whether the TARGET exists
+
+    //Start here
+    if (nextLetter === target) {
+      return true;
+    } else {
+      // If it does exist, FALSE
+      return false;
+    }
+  }, '')
+  return letterCount
 }
+console.log(isPresent());
 
 // PARTY WITH MAP AND REDUCE *AT THE SAME TIME*
 
