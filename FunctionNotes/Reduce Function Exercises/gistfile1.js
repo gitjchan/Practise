@@ -167,3 +167,28 @@ console.log(decode());
 
 
 // Try to write a encoding function
+function encodeSentence(str){
+	return [...str].map(x => encodeLetter(x)).join(" ");
+}
+/*
+* Forever loop through with generating a random number from 0 to 9 each time util
+* the sum of generated numbers = ascii value of input char string
+*/
+function encodeLetter(s){
+	let ascii = s.charCodeAt(0);
+	let values = [];
+	let sum = 0;
+	while(true){		
+		let r = Math.floor(Math.random()*10);
+		if(sum === ascii){
+			break;
+                 }
+		if(sum + r > ascii){
+			values.push(ascii - sum);
+			break;
+                 }
+		sum += r;
+		values.push(r);
+         }
+	return values.join("");
+}
