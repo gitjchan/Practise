@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<body>
+    <p>Check the console</p>
+    <script>
+        // Try to write a encoding function
+        const makeSecret = 'rocky';
+        const encoded = function(value = makeSecret) {
+          return value
+            .split('')
+            .map(letter => {
+              const letterCharCode = letter.charCodeAt(0);
+              const codeArray = [];
+              while (codeArray.length < 20) {
+                const random = Math.floor(Math.random(letterCharCode) * 10);
+                if (codeArray.length === 20) {
+                  break;
+                }
+                codeArray.push(random);
+              }
+              return codeArray.reduce((prev, next) => {
+                return `${prev}${next}`;
+              });
+            })
+            .join(' ');
+        };
+
+        console.log(encoded());
+        /*
+         * Forever loop through with generating a random number from 0 to 9 each time util
+         * the sum of generated numbers = ascii value of input char string
+         */
+    </script>
+</body>
+
+</html>
