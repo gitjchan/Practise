@@ -8,132 +8,128 @@
 	<title>Functional Programming in Javascript</title>
 	<script type="text/javascript">
 		const newReleases = [
-			{
-				id: 70111470,
-				title: 'Die Hard',
-				boxart: 'http://cdn-0.nflximg.com/images/2891/DieHard.jpg',
-				uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
-				rating: [4.0],
-				bookmark: [],
-			},
-			{
-				id: 654356453,
-				title: 'Bad Boys',
-				boxart: 'http://cdn-0.nflximg.com/images/2891/BadBoys.jpg',
-				uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
-				rating: [5.0],
-				bookmark: [{ id: 432534, time: 65876586 }],
-			},
-			{
-				id: 65432445,
-				title: 'The Chamber',
-				boxart: 'http://cdn-0.nflximg.com/images/2891/TheChamber.jpg',
-				uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
-				rating: [4.0],
-				bookmark: [],
-			},
-			{
-				id: 675465,
-				title: 'Fracture',
-				boxart: 'http://cdn-0.nflximg.com/images/2891/Fracture.jpg',
-				uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
-				rating: [5.0],
-				bookmark: [{ id: 432534, time: 65876586 }],
-			},
+		  {
+		    id: 70111470,
+		    title: 'Die Hard',
+		    boxart: 'http://cdn-0.nflximg.com/images/2891/DieHard.jpg',
+		    uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
+		    rating: [4.0],
+		    bookmark: [],
+		  },
+		  {
+		    id: 654356453,
+		    title: 'Bad Boys',
+		    boxart: 'http://cdn-0.nflximg.com/images/2891/BadBoys.jpg',
+		    uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
+		    rating: [5.0],
+		    bookmark: [{ id: 432534, time: 65876586 }],
+		  },
+		  {
+		    id: 65432445,
+		    title: 'The Chamber',
+		    boxart: 'http://cdn-0.nflximg.com/images/2891/TheChamber.jpg',
+		    uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
+		    rating: [4.0],
+		    bookmark: [],
+		  },
+		  {
+		    id: 675465,
+		    title: 'Fracture',
+		    boxart: 'http://cdn-0.nflximg.com/images/2891/Fracture.jpg',
+		    uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
+		    rating: [5.0],
+		    bookmark: [{ id: 432534, time: 65876586 }],
+		  },
 		];
 		const movieLists = [
-			{
-				name: 'New Releases',
-				videos: [
-					{
-						id: 70111470,
-						title: 'Die Hard',
-						boxart: 'http://cdn-0.nflximg.com/images/2891/DieHard.jpg',
-						uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
-						rating: 4.0,
-						bookmark: [],
-					},
-					{
-						id: 654356453,
-						title: 'Bad Boys',
-						boxart: 'http://cdn-0.nflximg.com/images/2891/BadBoys.jpg',
-						uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
-						rating: 5.0,
-						bookmark: [{ id: 432534, time: 65876586 }],
-					},
-				],
-			},
-			{
-				name: 'Dramas',
-				videos: [
-					{
-						id: 65432445,
-						title: 'The Chamber',
-						boxart: 'http://cdn-0.nflximg.com/images/2891/TheChamber.jpg',
-						uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
-						rating: 4.0,
-						bookmark: [],
-					},
-					{
-						id: 675465,
-						title: 'Fracture',
-						boxart: 'http://cdn-0.nflximg.com/images/2891/Fracture.jpg',
-						uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
-						rating: 5.0,
-						bookmark: [{ id: 432534, time: 65876586 }],
-					},
-				],
-			},
+		  {
+		    name: 'New Releases',
+		    videos: [
+		      {
+		        id: 70111470,
+		        title: 'Die Hard',
+		        boxart: 'http://cdn-0.nflximg.com/images/2891/DieHard.jpg',
+		        uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
+		        rating: 4.0,
+		        bookmark: [],
+		      },
+		      {
+		        id: 654356453,
+		        title: 'Bad Boys',
+		        boxart: 'http://cdn-0.nflximg.com/images/2891/BadBoys.jpg',
+		        uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
+		        rating: 5.0,
+		        bookmark: [{ id: 432534, time: 65876586 }],
+		      },
+		    ],
+		  },
+		  {
+		    name: 'Dramas',
+		    videos: [
+		      {
+		        id: 65432445,
+		        title: 'The Chamber',
+		        boxart: 'http://cdn-0.nflximg.com/images/2891/TheChamber.jpg',
+		        uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
+		        rating: 4.0,
+		        bookmark: [],
+		      },
+		      {
+		        id: 675465,
+		        title: 'Fracture',
+		        boxart: 'http://cdn-0.nflximg.com/images/2891/Fracture.jpg',
+		        uri: 'http://api.netflix.com/catalog/titles/movies/70111470',
+		        rating: 5.0,
+		        bookmark: [{ id: 432534, time: 65876586 }],
+		      },
+		    ],
+		  },
 		];
 		const videoArray = [];
 
 		// Exercise 1 - Use .forEach to push into an array
 		function exerciseOne() {
-			newReleases.forEach(function (video) {
-				return videoArray.push({ id: video.id, title: video.title });
-			});
-			return videoArray;
+		  newReleases.forEach(function(video) {
+		    return videoArray.push({ id: video.id, title: video.title });
+		  });
+		  return videoArray;
 		}
 
 		// Exercise 2 - Using .map to do the same exercise as Exercise 1
 		function exerciseTwo() {
-			return newReleases.map(video => {
-				return { id: video.id, title: video.title };
-			});
+		  return newReleases.map(video => {
+		    return { id: video.id, title: video.title };
+		  });
 		}
 
 		// Exercise 3 - Use forEach() to collect only those videos with a rating of 5.0
 		function exerciseThree() {
-			newReleases.forEach(function (video) {
-				if (video.rating === 5.0) {
-					videoArray.push(video);
-				}
-			});
+		  newReleases.forEach(function(video) {
+		    if (video.rating === 5.0) {
+		      videoArray.push(video);
+		    }
+		  });
 		}
 
 		// Exercise 4 - Chain filter and map to collect the ids of videos that have a rating of 5.0
 		function exerciseFour() {
-			return newReleases
-				.filter(function (video) {
-					return video.rating === 5.0;
-				})
-				.map(function (video) {
-					return video.id;
-				});
+		  return newReleases
+		    .filter(function(video) {
+		      return video.rating === 5.0;
+		    })
+		    .map(function(video) {
+		      return video.id;
+		    });
 		}
 		// Exercise 5 - Flatten the movieLists array into an array of video ids
 		function exerciseFive() {
-			movieLists.forEach(function (movieList) {
-				movieList.videos.forEach(function (video) {
-					videoArray.push(video.id);
-				});
-			});
+		  movieLists.forEach(function(movieList) {
+		    movieList.videos.forEach(function(video) {
+		      videoArray.push(video.id);
+		    });
+		  });
 
-			return videoArray;
-		}
-		// Exercise 5 - ES6 alternative
-		function exerciseFiveAlt() {
-			{ name } = movieList;
+		  return videoArray;
 		}
 	</script>
 	</body>
