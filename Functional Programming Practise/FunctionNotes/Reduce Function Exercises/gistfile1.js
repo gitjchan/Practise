@@ -98,11 +98,11 @@ const countLetters = function(string = 'abvcsdawerrghbyuthfdvd') {
   const letterCount = stringArray.reduce((currentLetters, nextLetter) => {
     // Push the string into the object as a property, and the count as a value
     // Need to have a check to see if the currentLetters === nextLetter ? X : Y
-    // If it does not exist, make = 1
+    // If it does exist, increment
     if (currentLetters[nextLetter]) {
       currentLetters[nextLetter]++;
     } else {
-      // If it does exist, increment
+      // If it does not exist, make = 1
       currentLetters[nextLetter] = 1;
     }
     // Concise but less readable version
