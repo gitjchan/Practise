@@ -419,8 +419,9 @@
 		// Exercise 10 - Retrieve the id, title, and smallest box art url for every video.
 		function exerciseTen() {
 		  return movieLists3.map(movieList => {
-		    // const [...all] = movieList.videos;
-		    return movieList.videos;
+		    return movieList.videos.map(video => {
+		      return video;
+		    });
 		  });
 		}
 	</script>
