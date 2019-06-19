@@ -417,22 +417,44 @@
 		}
 
 		// Exercise 10 - Retrieve the id, title, and smallest box art url for every video.
+		// function exerciseTen() {
+		//   const movieArray = [];
+		//   return movieLists3.map(movie => {
+		//     return movie.videos.map(video => {
+		//       return video.boxarts
+		//         .reduce(function(acc, curr) {
+		//           if (acc.width * acc.height < curr.width * curr.height) {
+		//             return [acc];
+		//           }
+		//           return [curr];
+		//         })
+		//         .map(function(boxart) {
+		//           movieArray.push({
+		//             id: video.id,
+		//             title: video.title,
+		//             boxart: boxart.url,
+		//           });
+		//           return movieArray;
+		//         });
+		//     });
+		//   });
+		// }
 		function exerciseTen() {
 		  //   debugger;
-		  return movieLists3.map(movie => {
-		    return movie.videos.map(video => {
-		      return video.boxarts
-		        .reduce(function(acc, curr) {
-		          if (acc.width * acc.height < curr.width * curr.height) {
-		            return [acc];
+		  return [].concat(
+		    ...movieLists3.map(({ videos }) => {
+		      return videos.map(video => {
+		        return video.boxarts.reduce((current, next) => {
+		          if (current.width * current.height < next.width * next.height) {
+		            return { id: video.id, title: video.title, boxart: current.url };
+		            // return current;
 		          }
-		          return [curr];
-		        })
-		        .map(function(boxart) {
-		          return { id: video.id, title: video.title, boxart: boxart.url };
+		          return { id: video.id, title: video.title, boxart: next.url };
+		          //   return video;
 		        });
-		    });
-		  });
+		      });
+		    })
+		  );
 		}
 	</script>
 	</body>
